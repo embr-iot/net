@@ -4,6 +4,6 @@
 
 namespace embr::inline _net {
 
-esp_err_t simple_flash_init();
+esp_err_t simple_flash_init(bool force_erase = false);
 
 }
