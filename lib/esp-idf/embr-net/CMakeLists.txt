@@ -5,5 +5,7 @@ list(TRANSFORM SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/)
 
 idf_component_register(
     SRCS ${SOURCES}
-    INCLUDE_DIRS "include"
+    INCLUDE_DIRS
+        "include"
+        ${CMAKE_CURRENT_LIST_DIR}/../../lwip/include
     REQUIRES estd esp_wifi)
