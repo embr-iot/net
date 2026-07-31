@@ -1,0 +1,3 @@
+dependencies:
+  embr-net:
+    path: ../../../../lib/esp-idf/embr-net

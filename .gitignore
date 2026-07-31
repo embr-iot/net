@@ -1,0 +1,7 @@
+# CMake general
+build/
+
+# ESP-IDF
+dependencies.lock
+sdkconfig
+managed_components/

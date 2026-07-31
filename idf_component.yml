@@ -1,7 +1,6 @@
 version: "0.1.0"
 description: "embr::net"
-tags:
-  - wifi lwip
+tags: [wifi, lwip]
 dependencies:
   embr-net:
     path: lib/esp-idf/embr-net
