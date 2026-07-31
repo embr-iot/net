@@ -4,4 +4,8 @@ build/
 # ESP-IDF
 dependencies.lock
 sdkconfig
+sdkconfig.old
 managed_components/
+
+# ESP-IDF (our stuff)
+sdkconfig.local
