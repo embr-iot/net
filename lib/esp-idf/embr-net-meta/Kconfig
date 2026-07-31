@@ -1,0 +1,5 @@
+menu "embr::net"
+
+rsource ../embr-net/Kconfig.local
+
+endmenu
