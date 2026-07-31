@@ -1,5 +1,10 @@
+#include <embr/lwip/shared_pbuf.h>
+
 #include <unity.h>
 
-TEST_CASE("embr::net pbuf", "[pbuf]")
+using namespace embr;
+
+TEST_CASE("embr::lwip pbuf", "[pbuf]")
 {
+    auto p = lwip::shared_pbuf::alloc(10);
 }

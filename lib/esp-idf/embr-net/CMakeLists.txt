@@ -6,4 +6,4 @@ list(TRANSFORM SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/)
 idf_component_register(
     SRCS ${SOURCES}
     INCLUDE_DIRS "include"
-    REQUIRES esp_wifi)
+    REQUIRES estd esp_wifi)

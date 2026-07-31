@@ -1,0 +1,16 @@
+menu "embr::net"
+
+    menu "Hard-code WiFi credentials"
+        help
+            Unusual for production, but useful for test and dev oriented
+            code
+
+        config EMBR_NET_WIFI_SSID
+            string "WiFi SSID Name"
+
+        config EMBR_NET_WIFI_PASSWORD
+            string "WiFi Password"
+
+    endmenu
+
+endmenu
