@@ -1,0 +1,5 @@
+description: "embr::net"
+dependencies:
+  embr:
+    git: git@github.com:malachi-iot/embr.git
+    version: v0.4.7
