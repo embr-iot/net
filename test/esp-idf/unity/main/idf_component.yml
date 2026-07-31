@@ -1,3 +1,5 @@
 dependencies:
+  # More PGESP-74 woes
   embr-net:
     path: ../../../../lib/esp-idf/embr-net
+    #path: ../../../..
