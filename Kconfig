@@ -1,1 +1,1 @@
-rsource lib/esp-idf/embr-net-meta/Kconfig
+rsource "lib/esp-idf/embr-net-meta/Kconfig"

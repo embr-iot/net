@@ -1,0 +1,4 @@
+dependencies:
+  espressif/console_simple_init: ^1.1.0
+  embr-net:
+    path: ../../../../lib/esp-idf/embr-net

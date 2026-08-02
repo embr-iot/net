@@ -1,5 +1,5 @@
 menu "embr::net"
 
-    rsource Kconfig.local
+    rsource "Kconfig.local"
 
 endmenu
