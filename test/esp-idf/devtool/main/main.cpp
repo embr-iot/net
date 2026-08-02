@@ -1,8 +1,9 @@
+#include "devtool.h"
+
 #include <embr/esp-idf/net/fwd.h>
 
 #include <console_simple_init.h>
 
-#include <argtable3/argtable3.h>
 #include <esp_console.h>
 
 #include <string>
@@ -10,14 +11,6 @@
 using namespace embr;
 
 using string = const std::string_view;
-
-struct Args
-{
-    struct arg_str* command;
-    struct arg_str* arg1;
-    struct arg_str* arg2;
-    struct arg_end* end;
-};
 
 static Args args;
 
@@ -47,7 +40,6 @@ esp_err_t sys_console_init(void)
         .context = nullptr
     };
 
-    // TODO: Put in restart, meminfo and maybe sleep
     args.command = arg_str1(nullptr, nullptr,
         "<test>",
         "");
@@ -64,6 +56,8 @@ esp_err_t sys_console_init(void)
     return esp_console_cmd_register(&cmd);
 }
 
+esp_err_t wifi_console_init();
+
 extern "C" void app_main(void)
 {
     ESP_ERROR_CHECK(simple_flash_init());
@@ -71,6 +65,7 @@ extern "C" void app_main(void)
     ESP_ERROR_CHECK(console_cmd_init());
 
     ESP_ERROR_CHECK(sys_console_init());
+    ESP_ERROR_CHECK(wifi_console_init());
 
     ESP_ERROR_CHECK(console_cmd_start());
 }
