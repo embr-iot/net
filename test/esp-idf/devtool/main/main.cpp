@@ -1,6 +1,7 @@
 #include "devtool.h"
 
 #include <embr/esp-idf/net/fwd.h>
+#include <wifi-console.h>
 
 #include <console_simple_init.h>
 
@@ -55,8 +56,6 @@ esp_err_t sys_console_init(void)
     
     return esp_console_cmd_register(&cmd);
 }
-
-esp_err_t wifi_console_init();
 
 extern "C" void app_main(void)
 {
