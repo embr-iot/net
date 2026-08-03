@@ -26,16 +26,16 @@ static union
     unsigned armed_raw;
 };
 
-esp_err_t arm_start()
+esp_err_t arm_start(wifi_mode_t mode = WIFI_MODE_NULL)
 {
-    if(armed.ap)
+    if(armed.ap || mode == WIFI_MODE_AP)
     {
         if(armed.sta)
             return esp_wifi_set_mode(WIFI_MODE_APSTA);
         else
             return esp_wifi_set_mode(WIFI_MODE_AP);
     }
-    if(armed.sta)
+    if(armed.sta || mode == WIFI_MODE_STA)
     {
         return esp_wifi_set_mode(WIFI_MODE_STA);
     }
@@ -78,7 +78,9 @@ static int wifi(int argc, char *argv[])
         }
         else if(arg1 == "start")
         {
-            ESP_ERROR_CHECK(arm_start());
+            if(!armed_raw)  ESP_ERROR_CHECK(preinit());
+
+            ESP_ERROR_CHECK(arm_start(WIFI_MODE_AP));
             ESP_ERROR_CHECK(ap_init());
             ESP_ERROR_CHECK(esp_wifi_start());
             armed.started = true;
@@ -102,7 +104,9 @@ static int wifi(int argc, char *argv[])
         }
         else if(arg1 == "start")
         {
-            ESP_ERROR_CHECK(arm_start());
+            if(!armed_raw)  ESP_ERROR_CHECK(preinit());
+
+            ESP_ERROR_CHECK(arm_start(WIFI_MODE_STA));
             ESP_ERROR_CHECK(sta_init());
             ESP_ERROR_CHECK(esp_wifi_start());
             armed.started = true;

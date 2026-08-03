@@ -1,6 +1,7 @@
 #include "devtool.h"
 
 #include <embr/esp-idf/net/fwd.h>
+#include <embr/net/console/lwip.h>
 #include <wifi-console.h>
 
 #include <console_simple_init.h>
@@ -63,6 +64,7 @@ extern "C" void app_main(void)
 
     ESP_ERROR_CHECK(console_cmd_init());
 
+    ESP_ERROR_CHECK(lwip_udp_console_init());
     ESP_ERROR_CHECK(sys_console_init());
     ESP_ERROR_CHECK(wifi_console_init());
 

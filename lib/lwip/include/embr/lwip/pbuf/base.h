@@ -39,7 +39,19 @@ public:
 
     unsigned use_count() const { return pbuf_->ref; }
 
+    void* payload() const { return pbuf_->payload; }
+
     constexpr bool valid() const { return pbuf_; }
+
+    void realloc(uint16_t new_len)
+    {
+        pbuf_realloc(pbuf_, new_len);
+    }
+
+    err_t take(const void* src, uint16_t len) const
+    {
+        return pbuf_take(pbuf_, src, len);
+    }
 
     uint8_t free()
     {
