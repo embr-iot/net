@@ -1,7 +1,7 @@
 #include <esp_log.h>
 #include <nvs_flash.h>
 
-namespace embr::inline _net {
+namespace embr::inline net {
 
 esp_err_t simple_flash_init(bool force_erase)
 {

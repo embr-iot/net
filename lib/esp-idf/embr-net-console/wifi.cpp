@@ -7,14 +7,12 @@
 
 #include <string>
 
-//using namespace embr;
-
 using string = const std::string_view;
 
 // NOTE: If PGESP-74 ever gets resolved, we can put this out into an embr-net-console
 // helper and share it
 
-static Args args;
+static embr::console::Args args;
 
 static union
 {

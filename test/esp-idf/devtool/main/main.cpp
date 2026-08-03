@@ -13,7 +13,7 @@ using namespace embr;
 
 using string = const std::string_view;
 
-static Args args;
+static console::Args args;
 
 static int sys(int argc, char *argv[])
 {
