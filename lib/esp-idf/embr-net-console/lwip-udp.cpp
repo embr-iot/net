@@ -46,6 +46,7 @@ static void udp_echo_recv(void* arg,
         (const char*)buf.payload(),
         (unsigned)port);
 
+    [[maybe_unused]]
     err_t err = udp_sendto(pcb, buf, addr, port);
 }
 

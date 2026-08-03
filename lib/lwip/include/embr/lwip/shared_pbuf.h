@@ -24,6 +24,16 @@ public:
     {
         return { pbuf_alloc(PBUF_TRANSPORT, length, type) };
     }
+
+    // 03AUG26 MB - UNTESTED
+    static Derived alloced(
+        pbuf_layer layer, uint16_t length, pbuf_type type,
+        pbuf_custom* p, void* payload_mem, uint16_t payload_size)
+    {
+        return { pbuf_alloced_custom(
+            layer, length, type,
+            p, payload_mem, payload_size) };
+    }
 };
 
 }

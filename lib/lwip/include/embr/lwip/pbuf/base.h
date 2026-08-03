@@ -34,6 +34,8 @@ public:
         if(owning && pbuf_)   pbuf_free(pbuf_);
     }
 
+    // orly, type not there?
+    //pbuf_type type() const { return pbuf_->type; }
     uint16_t length() const { return pbuf_->len; }
     uint16_t total_length() const { return pbuf_->tot_len; }
 
@@ -43,9 +45,14 @@ public:
 
     constexpr bool valid() const { return pbuf_; }
 
-    void realloc(uint16_t new_len)
+    void realloc(uint16_t new_len) const
     {
         pbuf_realloc(pbuf_, new_len);
+    }
+
+    uint16_t copy_partial(void* dest, uint16_t len, uint16_t offset) const
+    {
+        return pbuf_copy_partial(pbuf_, dest, len, offset);
     }
 
     err_t take(const void* src, uint16_t len) const
