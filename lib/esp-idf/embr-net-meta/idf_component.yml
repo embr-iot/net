@@ -1,0 +1,3 @@
+dependencies:
+  embr-net:
+    override_path: ../embr-net
