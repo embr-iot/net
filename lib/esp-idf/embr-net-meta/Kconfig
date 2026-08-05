@@ -1,6 +1,10 @@
-menu "embr::net"
+menu "embr::net::meta"
 
-rsource "../embr-net/Kconfig.local"
-rsource "../embr-net-console/Kconfig.local"
+# Now that our idf_component actually reaches out, these are not needed.
+# Also, override_path isn't resilient enough to support this, since in
+# that case ".." goes to "managed_components/embr-net" who actually is
+# possibly the top level component
+#rsource "../embr-net/Kconfig.local"
+#rsource "../embr-net-console/Kconfig.local"
 
 endmenu
