@@ -1,1 +1,4 @@
-rsource "lib/esp-idf/embr-net-meta/Kconfig"
+# We like the idea of pointing this at meta, but override_path approach doesn't
+# like it
+rsource "lib/esp-idf/embr-net/Kconfig"
+rsource "lib/esp-idf/embr-net-console/Kconfig"
