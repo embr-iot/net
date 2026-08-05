@@ -2,6 +2,7 @@ version: "0.1.0"
 description: "embr::net"
 tags: [wifi, lwip]
 # PGESP-74 woes
-dependencies:
-  embr-net-meta:
-    override_path: lib/esp-idf/embr-net-meta
+# Seems to *almost* work
+#dependencies:
+#  embr-net-meta:
+#    override_path: lib/esp-idf/embr-net-meta
