@@ -4,6 +4,7 @@
 
 #include <esp_console.h>
 #include <esp_wifi.h>
+#include <nvs_flash.h>
 
 #include <string>
 
@@ -13,6 +14,19 @@ using string = const std::string_view;
 // helper and share it
 
 static embr::console::Args args;
+
+static const char* nvs_ns = "embr:net:con";
+
+struct
+{
+    struct
+    {
+        bool ap : 1;
+        bool sta : 1;
+
+    }   autostart;
+
+}   prefs;
 
 static union
 {
@@ -61,6 +75,13 @@ static int wifi(int argc, char *argv[])
 
     string command = args.command->sval[0];
     string arg1 = args.arg1->sval[0];
+
+    nvs_handle_t nvs;
+    esp_err_t ret = nvs_open(nvs_ns, NVS_READWRITE, &nvs);
+
+    ESP_ERROR_CHECK_WITHOUT_ABORT(ret);
+
+    if(ret == ESP_OK)   nvs_close(nvs);
 
     if(command == "ap")
     {
@@ -130,6 +151,18 @@ static int wifi(int argc, char *argv[])
 
 esp_err_t wifi_console_init()
 {
+    nvs_handle_t nvs;
+    esp_err_t ret = nvs_open(nvs_ns, NVS_READONLY, &nvs);
+
+    ESP_ERROR_CHECK_WITHOUT_ABORT(ret);
+
+    if(ret == ESP_OK)
+    {
+        size_t len = sizeof(prefs);
+        ret = nvs_get_blob(nvs, "prefs", &prefs, &len);
+        nvs_close(nvs);
+    }
+
     const esp_console_cmd_t cmd
     {
         .command = "wifi",
