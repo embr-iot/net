@@ -1,0 +1,4 @@
+# TBD not used yet due to PGESP-74 experimentation
+config EMBR_NET_WIFI_CONSOLE_AUTOSTART
+    bool "Whether to autostart ap/sta on boot"
+    default y
