@@ -180,6 +180,29 @@ esp_err_t sta_init(esp_netif_t** wifi_netif)
     return esp_wifi_set_config(WIFI_IF_STA, &wifi_config);
 }
 
+#define ESPNOW_WIFI_MODE WIFI_MODE_STA
+#define ESPNOW_WIFI_IF   WIFI_IF_STA
+
+// UNTESTED
+// DEBT: esp_wifi_set_mode is still in flux.  This is because sta_init,
+// ap_init and esp_now_init can operate in either their native mode or the sta+ap mode
+esp_err_t esp_now_init(int channel)
+{
+    ESP_ERROR_CHECK(esp_wifi_set_storage(WIFI_STORAGE_RAM));
+    ESP_ERROR_CHECK(esp_wifi_set_mode(ESPNOW_WIFI_MODE));
+    ESP_ERROR_CHECK(esp_wifi_set_channel(channel, WIFI_SECOND_CHAN_NONE));
+
+#if CONFIG_ESPNOW_ENABLE_LONG_RANGE
+    ESP_ERROR_CHECK(
+        esp_wifi_set_protocol(
+            ESPNOW_WIFI_IF,
+            WIFI_PROTOCOL_11B|WIFI_PROTOCOL_11G|WIFI_PROTOCOL_11N|WIFI_PROTOCOL_LR));
+#endif
+
+    return ESP_OK;
+}
+
+
 esp_err_t preinit(bool strict)
 {
     ESP_ERROR_CHECK(esp_netif_init());
