@@ -1,6 +1,7 @@
 #include "embr/esp-idf/wifi/fwd.h"
 #include "embr/esp-idf/wifi/service.h"
 
+#include <esp_check.h>
 #include <esp_log.h>
 #include <esp_wifi.h>
 
@@ -179,10 +180,15 @@ esp_err_t sta_init(esp_netif_t** wifi_netif)
     return esp_wifi_set_config(WIFI_IF_STA, &wifi_config);
 }
 
-esp_err_t preinit()
+esp_err_t preinit(bool strict)
 {
     ESP_ERROR_CHECK(esp_netif_init());
-    ESP_ERROR_CHECK(esp_event_loop_create_default());
+    esp_err_t ret = esp_event_loop_create_default();
+
+    if(ret == ESP_ERR_INVALID_STATE && !strict)
+        ESP_LOGW(TAG, "Ignoring already-initialized event loop");
+    else
+        ESP_RETURN_ON_ERROR(ret, TAG, "Couldn't create event loop");
 
     const wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
     return esp_wifi_init(&cfg);

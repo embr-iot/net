@@ -17,7 +17,7 @@ class service;
 namespace embr::wifi {
 
 // Low level calls, needs assistance
-esp_err_t preinit();
+esp_err_t preinit(bool strict = false);
 esp_err_t ap_init(esp_netif_t** wifi_netif = nullptr);
 esp_err_t sta_init(esp_netif_t** wifi_netif = nullptr);
 

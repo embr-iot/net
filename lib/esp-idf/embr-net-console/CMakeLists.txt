@@ -1,6 +1,6 @@
 # CMakeLists dormant and untested
 
-include({$CMAKE_CURRENT_LIST_DIR}/sources.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/sources.cmake)
 
 # DEBT: PGESP-74 woes
 list(TRANSFORM SOURCES PREPEND ${CMAKE_CURRENT_LIST_DIR}/)
