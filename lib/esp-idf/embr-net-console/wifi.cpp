@@ -125,6 +125,7 @@ static int wifi(int argc, char *argv[])
 
     string command = args.command->sval[0];
     string arg1 = args.arg1->sval[0];
+    [[maybe_unused]]
     string arg2 = args.arg2->sval[0];
 
     if(command == "auth")

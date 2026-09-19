@@ -180,15 +180,23 @@ esp_err_t sta_init(esp_netif_t** wifi_netif)
     return esp_wifi_set_config(WIFI_IF_STA, &wifi_config);
 }
 
-#define ESPNOW_WIFI_MODE WIFI_MODE_STA
-
+// Guidance from
+// https://github.com/espressif/esp-idf/blob/e4df0c12f70daf0a7958e586e223c519fa9a1576/examples/wifi/espnow/main/espnow_example_main.c
 // UNTESTED
 // DEBT: esp_wifi_set_mode is still in flux.  This is because sta_init,
 // ap_init and esp_now_init can operate in either their native mode or the sta+ap mode
-esp_err_t esp_now_init(int channel, wifi_interface_t wifi_if)
+esp_err_t esp_now_init(wifi_mode_t mode)
 {
     ESP_ERROR_CHECK(esp_wifi_set_storage(WIFI_STORAGE_RAM));
-    ESP_ERROR_CHECK(esp_wifi_set_mode(ESPNOW_WIFI_MODE));
+    ESP_ERROR_CHECK(esp_wifi_set_mode(mode));
+
+    return ESP_OK;
+}
+
+esp_err_t esp_now_start(int channel, wifi_interface_t wifi_if)
+{
+    // esp-now has this peculiar need to start wifi before setting the channel
+    ESP_ERROR_CHECK(esp_wifi_start());
     ESP_ERROR_CHECK(esp_wifi_set_channel(channel, WIFI_SECOND_CHAN_NONE));
 
 #if CONFIG_ESPNOW_ENABLE_LONG_RANGE
