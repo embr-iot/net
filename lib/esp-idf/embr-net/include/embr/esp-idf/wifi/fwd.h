@@ -20,6 +20,7 @@ namespace embr::wifi {
 esp_err_t preinit(bool strict = false);
 esp_err_t ap_init(esp_netif_t** wifi_netif = nullptr);
 esp_err_t sta_init(esp_netif_t** wifi_netif = nullptr);
+esp_err_t esp_now_init(int channel, wifi_interface_t wifi_if = WIFI_IF_STA);
 
 // Assumes STA mode
 esp_err_t simple_init(esp_netif_t** wifi_netif = nullptr);
