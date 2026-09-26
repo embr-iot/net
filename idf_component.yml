@@ -1,8 +1,12 @@
 version: "0.1.0"
 description: "embr::net"
 tags: [wifi, lwip]
+dependencies:
 # PGESP-74 woes
 # Seems to *almost* work
-#dependencies:
 #  embr-net-meta:
 #    override_path: lib/esp-idf/embr-net-meta
+  # 26SEP26 DEBT: Due to PGESP-74 things duplicating this with content
+  # of lib/esp-idf/embr-net is the most practical option
+  malachi-iot/estd:
+    version: "^0.8.12"
