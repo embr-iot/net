@@ -2,7 +2,7 @@
 
 #include <argtable3/argtable3.h>
 
-namespace embr::inline net::console {
+namespace embr::esp_idf::console {
 
 struct Args
 {

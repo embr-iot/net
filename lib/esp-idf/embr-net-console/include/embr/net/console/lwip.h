@@ -4,7 +4,7 @@
 
 #include <esp_err.h>
 
-namespace embr::inline net {
+namespace embr::esp_idf {
 
 esp_err_t lwip_udp_console_init();
 

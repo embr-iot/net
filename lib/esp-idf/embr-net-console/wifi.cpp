@@ -14,7 +14,7 @@ using string = const std::string_view;
 // NOTE: If PGESP-74 ever gets resolved, we can put this out into an embr-net-console
 // helper and share it
 
-static embr::console::Args args;
+static embr::esp_idf::console::Args args;
 
 static const char* nvs_ns = "embr:net:con";
 static const char* nvs_prefs = "prefs";

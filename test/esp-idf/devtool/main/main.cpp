@@ -11,6 +11,7 @@
 #include <string>
 
 using namespace embr;
+using namespace embr::esp_idf;
 
 using string = const std::string_view;
 

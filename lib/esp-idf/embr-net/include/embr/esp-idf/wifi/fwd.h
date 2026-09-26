@@ -1,5 +1,7 @@
 #pragma once
 
+#include "embr/net/ethernet.h"
+
 #include <esp_wifi.h>
 
 const char* to_string(wifi_event_t event_id);
@@ -15,6 +17,8 @@ class service;
 }
 
 namespace embr::wifi {
+
+using namespace embr::ethernet;
 
 // Low level calls, needs assistance
 esp_err_t preinit(bool strict = false);

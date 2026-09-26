@@ -15,7 +15,7 @@ using string = std::string_view;
 // NOTE: If PGESP-74 ever gets resolved, we can put this out into an embr-net-console
 // helper and share it
 
-namespace embr::inline net {
+namespace embr::esp_idf {
 
 static const char* TAG = "embr::net::console::lwip";
 
