@@ -14,6 +14,15 @@ namespace embr::esp_idf::wifi {
 
 class service;
 
+inline ethernet::mac get_mac(wifi_interface_t interface = WIFI_IF_STA)
+{
+    ethernet::mac mac;
+
+    ESP_ERROR_CHECK(esp_wifi_get_mac(interface, mac.data()));
+
+    return mac; // RVO we're relying on you buddy
+}
+
 }
 
 namespace embr::wifi {
