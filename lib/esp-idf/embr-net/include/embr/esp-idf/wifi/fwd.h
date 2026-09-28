@@ -33,13 +33,15 @@ esp_err_t init(int channel, wifi_mode_t = WIFI_MODE_STA);
 }
 
 // EXPERIMENTAL
-namespace embr::inline idf {
-//using namespace embr::esp_idf;
+namespace embr::wifi::inline idf {
+
+using namespace embr::esp_idf::wifi;
+
 }
 
-namespace embr::wifi {
+namespace embr::esp_idf::wifi {
 
-using namespace embr::ethernet;
+//using namespace embr::ethernet;
 
 // Low level calls, needs assistance
 esp_err_t preinit(bool strict = false);

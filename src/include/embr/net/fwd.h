@@ -14,3 +14,13 @@ constexpr mac broadcast { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
 }
 
 }
+
+namespace embr::wifi {
+
+namespace addr {
+
+constexpr ethernet::mac broadcast = ethernet::addr::broadcast;
+
+}
+
+}

@@ -62,9 +62,13 @@ const char* to_string(wifi_err_reason_t reason)
     }
 }
 
-namespace embr::wifi {
+namespace embr::esp_idf::wifi {
 
-esp_idf::wifi::service service;
+namespace instance {
+
+wifi::service service;
+
+}
 
 static void event_handler(void* arg, esp_event_base_t event_base,
     int32_t event_id, void* event_data)
@@ -72,7 +76,7 @@ static void event_handler(void* arg, esp_event_base_t event_base,
     assert(event_base == WIFI_EVENT);
 
     [[maybe_unused]]
-    auto s = (esp_idf::wifi::service*) arg;
+    auto s = (service*) arg;
 
     const char* event_str = to_string((wifi_event_t)event_id);
     ESP_LOGV(TAG, "event_id=%s (%ld)", event_str, event_id);
@@ -175,7 +179,7 @@ esp_err_t sta_init(esp_netif_t** wifi_netif)
     strcpy((char*)wifi_config.sta.password, CONFIG_EMBR_NET_WIFI_PASSWORD);
 
     ESP_ERROR_CHECK(esp_event_handler_register(
-        WIFI_EVENT, ESP_EVENT_ANY_ID, &event_handler, &service));
+        WIFI_EVENT, ESP_EVENT_ANY_ID, &event_handler, &instance::service));
 
     return esp_wifi_set_config(WIFI_IF_STA, &wifi_config);
 }
