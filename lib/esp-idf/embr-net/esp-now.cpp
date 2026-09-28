@@ -13,14 +13,11 @@ namespace embr::esp_idf::esp_now {
 
 // Guidance from
 // https://github.com/espressif/esp-idf/blob/e4df0c12f70daf0a7958e586e223c519fa9a1576/examples/wifi/espnow/main/espnow_example_main.c
-// DEBT: My esp_wifi_set_mode code is still in flux.  This is because sta_init,
-// ap_init and esp_now_init can operate in either their native mode or the sta+ap mode
 esp_err_t init(int channel, wifi_mode_t mode)
 {
     ESP_ERROR_CHECK(esp_wifi_set_storage(WIFI_STORAGE_RAM));
-    ESP_ERROR_CHECK(esp_wifi_set_mode(mode));
-
-    return ESP_OK;
+    ESP_RETURN_ON_ERROR(esp_wifi_set_mode(mode),
+        TAG, "WiFi mode set failed");
 
     // esp-now has this peculiar need to start wifi before setting the channel
     ESP_RETURN_ON_ERROR(esp_wifi_start(), TAG, "WiFi start failed");
