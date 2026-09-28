@@ -25,6 +25,18 @@ inline ethernet::mac get_mac(wifi_interface_t interface = WIFI_IF_STA)
 
 }
 
+namespace embr::esp_idf::esp_now {
+
+esp_err_t add_broadcast_peer(wifi_interface_t = WIFI_IF_STA);
+esp_err_t init(int channel, wifi_mode_t = WIFI_MODE_STA);
+
+}
+
+// EXPERIMENTAL
+namespace embr::inline idf {
+using namespace embr::esp_idf;
+}
+
 namespace embr::wifi {
 
 using namespace embr::ethernet;
@@ -33,9 +45,6 @@ using namespace embr::ethernet;
 esp_err_t preinit(bool strict = false);
 esp_err_t ap_init(esp_netif_t** wifi_netif = nullptr);
 esp_err_t sta_init(esp_netif_t** wifi_netif = nullptr);
-esp_err_t esp_now_init(wifi_mode_t = WIFI_MODE_STA);
-esp_err_t esp_now_start(int channel, wifi_interface_t = WIFI_IF_STA);
-esp_err_t esp_now_add_broadcast_peer(wifi_interface_t = WIFI_IF_STA);
 
 // Assumes STA mode
 esp_err_t simple_init(esp_netif_t** wifi_netif = nullptr);

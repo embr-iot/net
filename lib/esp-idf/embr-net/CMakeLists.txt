@@ -17,6 +17,7 @@ if(EMBR_NET_CONSOLE)
 endif()
 
 set(MY_SOURCES
+    esp-now.cpp
     flash.cpp
     net.cpp
     wifi.cpp)

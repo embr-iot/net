@@ -3,7 +3,6 @@
 
 #include <esp_check.h>
 #include <esp_log.h>
-#include <esp_now.h>
 #include <esp_wifi.h>
 
 #include <cstring>
@@ -181,6 +180,7 @@ esp_err_t sta_init(esp_netif_t** wifi_netif)
     return esp_wifi_set_config(WIFI_IF_STA, &wifi_config);
 }
 
+/*
 // Guidance from
 // https://github.com/espressif/esp-idf/blob/e4df0c12f70daf0a7958e586e223c519fa9a1576/examples/wifi/espnow/main/espnow_example_main.c
 // DEBT: My esp_wifi_set_mode code is still in flux.  This is because sta_init,
@@ -209,16 +209,7 @@ esp_err_t esp_now_start(int channel, wifi_interface_t wifi_if)
 
     return ::esp_now_init();
 }
-
-esp_err_t esp_now_add_broadcast_peer(wifi_interface_t wifi_if)
-{
-    esp_now_peer_info_t peer{};
-    //peer->channel = CONFIG_ESPNOW_CHANNEL;
-    peer.ifidx = wifi_if;
-    memcpy(peer.peer_addr, ethernet::addr::broadcast.data(), ESP_NOW_ETH_ALEN);
-    return esp_now_add_peer(&peer);
-}
-
+*/
 
 esp_err_t preinit(bool strict)
 {
