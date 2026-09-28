@@ -34,7 +34,7 @@ esp_err_t init(int channel, wifi_mode_t = WIFI_MODE_STA);
 
 // EXPERIMENTAL
 namespace embr::inline idf {
-using namespace embr::esp_idf;
+//using namespace embr::esp_idf;
 }
 
 namespace embr::wifi {
