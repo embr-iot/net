@@ -207,7 +207,7 @@ esp_err_t esp_now_start(int channel, wifi_interface_t wifi_if)
             WIFI_PROTOCOL_11B|WIFI_PROTOCOL_11G|WIFI_PROTOCOL_11N|WIFI_PROTOCOL_LR));
 #endif
 
-    return esp_now_init();
+    return ::esp_now_init();
 }
 
 esp_err_t esp_now_add_broadcast_peer(wifi_interface_t wifi_if)
