@@ -24,7 +24,7 @@ TEST_CASE("embr::ethernet", "[ethernet]")
 
     TEST_ASSERT_EQUAL_STRING("01:02:03:10:20:3a", s.c_str());
 
-    s = ethernet::mac_to_string(mac2);
+    s = mac_to_string(mac2);
 
     TEST_ASSERT_EQUAL_STRING("0a:00:00:00:00:f1", s.c_str());
 }

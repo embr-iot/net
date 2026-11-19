@@ -1,6 +1,8 @@
 #pragma once
 
 #include "fwd.h"
+#include "ethernet/mac.h"
+#include "ethernet/mac-conv.hpp"
 
 #include <estd/charconv.h>
 #include <estd/string.h>
@@ -14,37 +16,6 @@ constexpr mac make_mac(const uint8_t* copy_from)
     mac mac;
     std::copy_n(copy_from, 6, mac.begin());
     return mac;
-}
-
-template <bool upper = false, class Char>
-constexpr void mac_to_chars(const uint8_t* mac, Char* out)
-{
-    using namespace estd;   // Needs estd >= v0.8.13-alpha2 due to bug in to_chars
-    const uint8_t* end = mac + 5;
-
-    auto to_hex = [](Char* o, uint8_t m) EMBR_NET_INLINE_BASE
-    {
-        // estd::detail::to_chars operates in reverse.  In other words, it is
-        // naturally right justified.
-        detail::to_chars_result<Char*> rc;
-        
-        if constexpr(upper)
-            rc = detail::to_chars_upper<16>(o, o + 2, m);
-        else
-            rc = detail::to_chars<16>(o, o + 2, m);
-
-        assert(rc.ec == errc{});
-
-        if(rc.ptr != o)   *o = '0';
-    };
-
-    for(; mac < end; ++mac, out += 3)
-    {
-        to_hex(out, *mac);
-        *(out + 2) = ':';
-    }
-
-    to_hex(out, *mac);
 }
 
 namespace internal {
@@ -61,12 +32,12 @@ template <bool upper = false>
 EMBR_NET_INLINE constexpr internal::mac_string mac_to_string(const uint8_t* mac)
 {
     constexpr unsigned max_size = sizeof(internal::mac_string_reference);
-    char s[max_size];
+    internal::mac_string s;
 
-    mac_to_chars(mac, s);
+    mac_to_chars(mac, s.data());
     s[max_size - 1] = 0;
 
-    return { s, max_size };
+    return s;
 }
 
 template <bool upper = false>
