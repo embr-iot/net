@@ -20,8 +20,6 @@ constexpr mac make_mac(const uint8_t* copy_from)
 
 namespace internal {
 
-constexpr char mac_string_reference[] = "0A:00:00:00:00:00";
-
 using mac_string = estd::layer1::string<sizeof(internal::mac_string_reference)>;
 
 }

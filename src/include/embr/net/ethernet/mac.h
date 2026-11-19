@@ -32,4 +32,12 @@ constexpr mac broadcast { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
 
 }
 
+namespace internal {
+
+constexpr char mac_string_reference[] = "0A:00:00:00:00:00";
+// Excludes null term
+constexpr unsigned mac_string_len = sizeof(internal::mac_string_reference) - 1;
+
+}
+
 }

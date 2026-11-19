@@ -27,4 +27,11 @@ TEST_CASE("embr::ethernet", "[ethernet]")
     s = mac_to_string(mac2);
 
     TEST_ASSERT_EQUAL_STRING("0a:00:00:00:00:f1", s.c_str());
+
+    uint8_t mac3[6];
+
+    estd::errc err = ethernet::mac_from_chars(out, mac3);
+
+    TEST_ASSERT_EQUAL(0, (int)err);
+    TEST_ASSERT_EQUAL_HEX8_ARRAY(mac3, mac1, 6);
 }

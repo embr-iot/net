@@ -6,6 +6,9 @@
 
 namespace embr::ethernet {
 
+// DEBT: Consider a concat-helper for these special first/last cases.  I've done
+// it a billion times before yet can't remember where any of them live now.
+
 template <bool upper = false, class CharIt>
 constexpr void mac_to_chars(const uint8_t* mac, CharIt out)
 {
@@ -38,12 +41,32 @@ constexpr void mac_to_chars(const uint8_t* mac, CharIt out)
 }
 
 template <class CharIt>
-void mac_from_chars(const CharIt in, uint8_t* mac)
+estd::errc mac_from_chars(CharIt in, uint8_t* mac)
 {
-    auto from_hex = [](const CharIt o) EMBR_NET_INLINE_BASE
-    {
+    using namespace estd;
 
+    const uint8_t* end = mac + 5;
+
+    auto from_hex = [](CharIt o, uint8_t* out) EMBR_NET_INLINE_BASE
+    {
+        // DEBT: estd needs better documentation on 'sto_mode' and also
+        // we'd prefer a detail:: flavor of this if we could
+        detail::from_chars_result<CharIt> r = estd::internal::from_chars_integer<16>(o, o + 2, *out);
+
+        return r.ec;
     };
+    
+
+    for(; mac < end; ++mac, in += 3)
+    {
+        errc err = from_hex(in, mac);
+        
+        if(err != errc{})  return err;
+
+        if(*(in + 2) != ':')    return errc::invalid_argument;
+    }
+
+    return from_hex(in, mac);
 }
 
 }
